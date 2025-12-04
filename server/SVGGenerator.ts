@@ -160,8 +160,6 @@ export class SVGGenerator {
 			fill-opacity="0.2"
 		/>`.trim();
 
-    // 2.864 - advance space
-    // 3 * (4 * this._scale) is the number of staff lines for spacing
     return `<text
 			font-family="Bravura"
 			fill="${this._color}"

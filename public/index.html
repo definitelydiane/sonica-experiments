@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="A minimal, accessible HTML5 scaffold to start a project." />
+  <title>Project Title — HTML5 Scaffold</title>
+
+  <!-- Favicon (replace with your path) -->
+	<!-- <link rel="icon" href="/favicon.ico" /> -->
+
+  <!-- Helpful defaults / SEO / Open Graph placeholders -->
+  <meta name="theme-color" content="#ffffff" />
+  <meta property="og:title" content="Project Title" />
+  <meta property="og:description" content="Short description of your project." />
+  <meta property="og:type" content="website" />
+
+	<!-- Google fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+	<style>
+		@font-face {
+			font-family: "Bravura";
+			src: url("/fonts/Bravura.otf") format("opentype");
+			font-weight: normal;
+			font-style: normal;
+			font-display: swap;
+		}
+
+		body {
+			background-color: #2e3440;
+			color: #d8dee9;
+
+			/* see: google font for inter */
+			font-family: "Inter", sans-serif;
+			font-optical-sizing: auto;
+			font-weight: normal;
+			font-style: normal;
+		}
+
+		p.bravura {
+			font-family: "Bravura", serif; /* serif as fallback */
+		}
+	</style>
+
+  
+</head>
+<body>
+	<h1>Hello world!</h1>
+	<div id="svg-out"></div>
+
+	<script>
+	window.onload = async (event) => {
+		const output = document.getElementById("svg-out");
+		const res = await fetch("/svg", { cache: 'no-store' }); // for test
+		if(!res.ok) {
+			console.error("Failed to fetch SVG!!");
+		} else {
+			const body = await res.text();
+			const parser = new DOMParser();
+			const svg = parser.parseFromString(body, "image/svg+xml");
+
+			const svgRoot = document.importNode(svg.documentElement, true);
+
+			output.innerHTML = '';
+			output.appendChild(svgRoot);
+		}
+	};
+	(async function () {
+		// Ensure the font is actually loaded
+		await document.fonts.load('1em "Bravura"');
+
+		
+	});
+	</script>	
+	</body>
+</html>

@@ -17,6 +17,9 @@ export class Router {
 	// "public/my_specific_file.txt". The order of precedence should be:
 	// 1. "public/my_specific_file.txt"
 	// 2. "public/*"
+	//
+	// 12/05 -- We can do this using URLPattern.
+	// 		See: https://docs.deno.com/examples/http_server_routing/
 	public async handle(req: Request): Promise<Response> {
 		const url = new URL(req.url);
 		const controller = this._controllers.get(url.pathname);

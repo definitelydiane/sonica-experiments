@@ -4,16 +4,16 @@
   <meta charset="utf-8" />
   
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="A minimal, accessible HTML5 scaffold to start a project." />
-  <title>Project Title — HTML5 Scaffold</title>
+  <meta name="description" content="Music education" />
+  <title>Sonica</title>
 
   <!-- Favicon (replace with your path) -->
 	<!-- <link rel="icon" href="/favicon.ico" /> -->
 
   <!-- Helpful defaults / SEO / Open Graph placeholders -->
   <meta name="theme-color" content="#ffffff" />
-  <meta property="og:title" content="Project Title" />
-  <meta property="og:description" content="Short description of your project." />
+  <meta property="og:title" content="Sonica" />
+  <meta property="og:description" content="Music education" />
   <meta property="og:type" content="website" />
 
 	<!-- Google fonts -->
@@ -31,29 +31,27 @@
 		}
 
 		body {
-			background-color: #2e3440;
-			color: #d8dee9;
-
 			/* see: google font for inter */
 			font-family: "Inter", sans-serif;
 			font-optical-sizing: auto;
 			font-weight: normal;
 			font-style: normal;
 		}
-
-		p.bravura {
-			font-family: "Bravura", serif; /* serif as fallback */
-		}
 	</style>
 
-  
-</head>
-<body>
-	<h1>Hello world!</h1>
-	<div id="svg-out"></div>
+	<link rel="stylesheet" href="/main.css">
 
+</head>
+<body class="dark:bg-neutral-800">
+	<div id="main-container" class="max-w-lg mx-auto">
+		<h1 class="text-xl dark:text-white">Hello world!</h1>
+		<div id="flash-card" class="dark:bg-neutral-600 p-4 rounded-xl">
+			<div id="svg-out"></div>
+		</div>
+	</div>
 	<script>
 	window.onload = async (event) => {
+		// SVG setup
 		const output = document.getElementById("svg-out");
 		const res = await fetch("/svg", { cache: 'no-store' }); // for test
 		if(!res.ok) {
@@ -69,11 +67,20 @@
 			output.appendChild(svgRoot);
 		}
 	};
-	(async function () {
-		// Ensure the font is actually loaded
-		await document.fonts.load('1em "Bravura"');
-
-		
+	// TODO: Remove this in prod
+	// Hot reload socket
+	const socket = new WebSocket("http://localhost:8000");
+	socket.addEventListener("open", () => {
+		"Hot reload connection established"
+	});
+	socket.addEventListener("message", (event) => {
+		console.log(`Recieved message from server: ${event.data}`);
+		if(event.data == "reload") {
+			window.location.reload(true);
+		}
+	});
+	socket.addEventListener("close", (event) => {
+		console.log("Hot reload connection closed.");
 	});
 	</script>	
 	</body>

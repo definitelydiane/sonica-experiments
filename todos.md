@@ -8,9 +8,7 @@ This is usually considered the maximum number of viable ledger lines to read.
 What if midi input devices supported?
 What if audio input supported?
 
-## What you were doing 12/3
-
-You were writing a script to pare down the font metadata files to send to the client
+## What you were doing 12/5
 You need to:
 
 - Bundle the SVGGenerator class for the front-end

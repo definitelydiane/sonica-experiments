@@ -94,6 +94,17 @@ export class SVGGenerator {
 
     const clef: Glyph = getGlyph("gClef");
     const qNote: Glyph = getGlyph("noteQuarterUp");
+		const pitch = this._parseScientificPitch("G4");
+
+		const baseLine = this._parseScientificPitch("E4");
+
+		// Get the difference between baseline pitch (the first line
+		// on the staff) and the target pitch
+		const diff = {
+			octave: pitch.octave - baseLine.octave,
+			letterClass: pitch.letterClass - baseLine.letterClass
+		}
+
     const staffPaddingL: number = 0.2 * this._fontSize;
     // Align the clef to the last staff line
     lines.push(
@@ -113,7 +124,9 @@ export class SVGGenerator {
         this._marginL +
           (this._staffSpaceHeight * clef.advanceWidth + staffPaddingL) +
           this._staffSpaceHeight * clef.advanceWidth,
-        this._staffMarginT,
+        this._staffMarginT -
+					(8 * this._staffSpaceHeight / 2 * diff.octave)  // Find our octave
+					- (this._staffSpaceHeight / 2 * diff.letterClass), // Adjust the letter
         { drawBBox: false }
       )
     );
@@ -168,4 +181,28 @@ export class SVGGenerator {
 			y="${y - glyph.offsetY * this._staffSpaceHeight}"
 		>${glyph.toString()}</text>${opts?.drawBBox ? bbox : null}`.trim();
   }
+
+	// TODO: this can probably move to a separate pitch class
+	private _parseScientificPitch(pitch: string): {
+		letterClass: string,
+		accidental?: string,
+		octave: number
+	} {
+		const re = /([A-G])(#|b|bb|##)?([0-9]+)/;
+		const matches = pitch.match(re);
+		const letterMap = {
+			'A': 0,
+			'B': 1,
+			'C': 2,
+			'D': 3,
+			'E': 4,
+			'F': 5,
+			'G': 6
+		}
+		return {
+			letterClass: letterMap[matches[1]],
+			accidental: matches[2] ?? undefined,
+			octave: parseInt(matches[3])
+		}
+	}
 }

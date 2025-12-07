@@ -78,6 +78,7 @@ export class SVGGenerator {
     lines.push(`</g>`);
 
     // Starting barline
+		// Find the values in engravingDefaults
     lines.push(
       `<line
 					 x1="${this._marginL}"
@@ -94,8 +95,11 @@ export class SVGGenerator {
 
     const clef: Glyph = getGlyph("gClef");
     const qNote: Glyph = getGlyph("noteQuarterUp");
+		const sharp: Glyph = getGlyph("accidentalSharp");
 		const pitch = this._parseScientificPitch("G4");
 
+		// What is the pitch of the first line on the staff?
+		// (everything is aligned to this first line)
 		const baseLine = this._parseScientificPitch("E4");
 
 		// Get the difference between baseline pitch (the first line
@@ -112,7 +116,6 @@ export class SVGGenerator {
         clef,
         this._marginL + staffPaddingL,
         this._staffMarginT,
-        { drawBBox: false }
       )
     );
     lines.push(
@@ -127,9 +130,13 @@ export class SVGGenerator {
         this._staffMarginT -
 					(8 * this._staffSpaceHeight / 2 * diff.octave)  // Find our octave
 					- (this._staffSpaceHeight / 2 * diff.letterClass), // Adjust the letter
-        { drawBBox: false }
       )
     );
+		lines.push(
+			this._createGlyphNode(
+				sharp,
+				this._marginL,
+				this._staffMarginT));
 
     // Ending barline
     lines.push(

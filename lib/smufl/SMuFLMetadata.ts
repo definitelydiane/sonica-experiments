@@ -1,9 +1,8 @@
+import GlyphNameMeta from "./metadata/glyphnames.json" with { type: "json" };
+import GlyphClass from "./metadata/classes.json" with { type: "json" };
+import BravuraMeta from "./metadata/bravura_metadata.json" with {type: "json"};
 
-import GlyphNameMeta from "./smufl-metadata/glyphnames.json" with { type: "json" };
-import GlyphClass from "./smufl-metadata/classes.json" with { type: "json" };
-import BravuraMeta from "./bravura_metadata.json" with {type: "json"};
-
-import type { GlyphName } from "./SMuFL.types.ts";
+import type { GlyphName } from "./types.ts";
 
 interface IGlyph {
 	readonly codepoint: number;

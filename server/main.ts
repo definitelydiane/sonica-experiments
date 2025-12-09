@@ -3,6 +3,8 @@ import { debounce } from "jsr:@std/async/debounce";
 import { Router, RouteController } from "./Router.ts";
 import { SVGGenerator } from "./SVGGenerator.ts";
 
+import { Score } from "../lib/score/Score.ts";
+
 export const IndexController: RouteController = {
   get: async (req: Request): Response => {
     const bytes = await Deno.readFile("public/index.html");
@@ -15,6 +17,16 @@ export const SVGController: RouteController = {
   get: async (req: Request): Response => {
     const generator = new SVGGenerator().height(128).fontSize(16 * 4);
     const result = generator.generate();
+    return new Response(result, {
+      "content-type": "image/svg+xml",
+    });
+  },
+} as const;
+
+export const SVGController2: RouteController = {
+  get: async (req: Request): Response => {
+    const score = new Score();
+    const result = score.renderSvg();
     return new Response(result, {
       "content-type": "image/svg+xml",
     });
@@ -89,6 +101,7 @@ export default async function serve(args: Partial<ServerArgs> = DefaultMainArgs)
 
   router.register("/", IndexController);
   router.register("/svg", SVGController);
+  router.register("/svg2", SVGController2);
   router.registerPublicFile("/fonts/Bravura.otf", "font/otf");
 	router.registerPublicFile("/main.css", "text/css");
 

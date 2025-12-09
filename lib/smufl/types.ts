@@ -1,4 +1,4 @@
-const _glyphNames = [
+declare const glyphNames: readonly [
 	"4stringTabClef",
 	"6stringTabClef",
 	"accSagittal11LargeDiesisDown",
@@ -2931,6 +2931,6 @@ const _glyphNames = [
 	"windTrillKey",
 	"windVeryTightEmbouchure",
 	"windWeakAirPressure",
-] as const;
+];
 
-export type GlyphName = typeof _glyphNames[number];
+export type GlyphName = typeof glyphNames[number];

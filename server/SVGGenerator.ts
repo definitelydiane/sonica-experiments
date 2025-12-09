@@ -1,4 +1,4 @@
-import { getGlyph } from "./SMuFLMetadata.ts";
+import { getGlyph } from "../lib/smufl/SMuFLMetadata.ts";
 
 export class SVGGenerator {
   // In px units

@@ -3,9 +3,9 @@
 // We use this to limit how many properties we actually need.
 //
 
-import GlyphNameMeta from "../server/smufl-metadata/glyphnames.json" with { type: "json" };
-import GlyphClasses from "../server/smufl-metadata/classes.json" with { type: "json" };
-import BravuraMeta from "../server/bravura_metadata.json" with { type: "json" };
+import GlyphNameMeta from "../lib/smufl/metadata/glyphnames.json" with { type: "json" };
+import GlyphClasses from "../lib/smufl/metadata/classes.json" with { type: "json" };
+import BravuraMeta from "../lib/smufl/metadata/bravura_metadata.json" with { type: "json" };
 
 if (import.meta.main) {
     // We can scan each file in each source directory for the `getGlyph()` method call

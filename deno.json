@@ -1,7 +1,7 @@
 {
   "tasks": {
     "dev": "deno run --watch --allow-net --allow-read --allow-run server/main.ts -d",
-		"generate-types": "deno run --allow-write --allow-read scripts/generate-glyph-name-type.ts",
+		"generate-types": "deno run --allow-write --allow-read scripts/generate-smufl-types.ts",
 		"pare-smufl-meta": "deno run --allow-write --allow-read scripts/pare-smufl-metadata.ts",
 		"update-tailwind": "deno --allow-all @tailwindcss/cli -i ./server/input.css -o ./public/main.css"
   },

@@ -1,1 +1,1 @@
-{"clefs":["gClef","fClef"],"clefsF":["fClef"],"clefsG":["gClef"],"combiningStaffPositions":["noteQuarterUp"],"forTextBasedApplications":["noteQuarterUp"]}
+{"accidentals":["accidentalSharp"],"accidentalsSagittalMixed":["accidentalSharp"],"accidentalsStandard":["accidentalSharp"],"clefs":["gClef"],"clefsG":["gClef"],"combiningStaffPositions":["noteQuarterUp","accidentalSharp"],"forTextBasedApplications":["noteQuarterUp"]}
